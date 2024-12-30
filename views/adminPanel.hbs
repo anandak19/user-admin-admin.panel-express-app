@@ -1,0 +1,38 @@
+<div class="container-fluid w-100 d-flex justify-content-center align-items-center form-wrapper">
+    <div class="main-card container px-5 h-50 w-100 rounded">
+        <h1 class="text-center">Admin panel</h1>
+
+
+        <div class="container mt-5">
+            <h1 class="text-center">User List</h1>
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Username</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Is Admin</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each users}}
+                    <tr>
+                        <td>{{this.username}}</td>
+                        <td>{{this.fullname}}</td>
+                        <td>{{this.email}}</td>
+                        <td>{{this.password}}</td>
+                        <td>{{this.isAdmin}}</td>
+                        <td>
+                            <a class="btn" href="http://">Update</a>
+                            <a class="btn" href="http://">Delete</a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

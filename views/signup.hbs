@@ -1,0 +1,34 @@
+<div class="container-fluid w-100 d-flex justify-content-center align-items-center form-wrapper">
+    <div class="main-card container px-5 h-50 w-50 rounded">
+        <h1 class="text-center">Sign up</h1>
+        <form id="signupForm" action="/api/signup/submited" method="POST" class="d-flex flex-column gap-3 mt-4" >
+            <div class="form-group">
+                <label for="fullName" >Fullname</label>
+                <input type="text" class="form-control" id="fullName" name="fullname" required>
+            </div>
+            <div class="form-group mt-1">
+                <label for="userName">Username</label>
+                <input type="text" class="form-control" id="userName" name="username" required>
+            </div>
+
+            <div class="form-group mt-1">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id="email" name="email" required>
+            </div>
+
+            <div class="form-group mt-1">
+                <label for="password">Password</label>
+                <input type="password" class="form-control underline-input" id="password" name="password" required>
+            </div>
+
+            <div class="form-group mt-1" id="passControl">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" class="form-control underline-input" id="confirmPassword" name="confirmPassword" required>
+            </div>
+
+            <span class="text-danger">{{alertMessage}}</span>
+            <button type="submit" class="btn login-btn btn-primary mt-1 fs-5 fw-bold">signup</button>
+        </form>
+        <p class="mt-2">Had account? <a href="/api/login">Login</a></p>
+    </div>
+</div>

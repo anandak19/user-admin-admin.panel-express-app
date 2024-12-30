@@ -1,0 +1,45 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 100vh;
+  /* background: linear-gradient(to right, #4589d4, #7b55b8); */
+  background: linear-gradient(to right, #a1ccfa, #c5a1ff);
+}
+
+/* *{
+  border: 1px solid gray;
+} */
+
+.main-card {
+  background-color: #ffffff;
+  padding: 22px 38px 28px 28px;
+  margin-top: 88px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+label{
+    font-size: 0.9rem;
+}
+.form-control{
+    border: none !important;
+    border-bottom: 2px solid #5278f7 !important;
+    border-radius: 0% !important;
+}
+.form-control:focus{
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: #021658 !important;
+}
+
+.form-control-error{
+  border-color: #ca0000 !important;
+}
+
+.image-wrapper{
+  height: 7rem;
+  img{
+      object-fit: cover;
+      height: 100%;
+  }
+}
+
+
