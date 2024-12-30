@@ -27,7 +27,7 @@ const validateAdmin = async (req, res) => {
 const getAllUsers = async (req, res) => {
     try {
         const users = await userSchema.find()
-        res.render('admin', {users: users})
+        res.render('adminPanel', {users: users})
     } catch (error) {
         res.status(500).json({error: 'Error featching users'})
     }
@@ -37,11 +37,10 @@ const getAllUsers = async (req, res) => {
 const searchByUsername = async (req, res) =>{
     try {
         const {username} = req.body
-        const result = userSchema.findOne({username})
-        console.log(result)
-
+        const result = await userSchema.findOne({username})
+        res.render('adminPanel', {users: [result]})
     } catch (error) {
-        res.status(500)
+        res.status(500).json({message: 'Error searching user', error: error.message})
     }
 }
 

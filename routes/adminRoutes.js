@@ -2,6 +2,7 @@ const express = require("express");
 const {
   validateAdmin,
   deleteUser,
+  searchByUsername,
 } = require("../controllers/adminController");
 const {
   adminLoginValidate,
@@ -34,7 +35,7 @@ router.get("/admin/login", (req, res) => {
 router.post("/admin/login/submitted", adminLoginValidate, validateAdmin);
 
 // search user by username
-router.get("/admin/action/search", checkIsAdmin);
+router.post("/admin/action/search", checkIsAdmin, searchByUsername);
 
 // create new user
 router.post("/admin/action/create", checkIsAdmin);

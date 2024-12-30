@@ -42,4 +42,11 @@ label{
   }
 }
 
+.search-box{
+  padding: 4px;
+  transition: all 0.3s ease-in;
+}
+.search-box:focus{
+  transform: scale(1.03);
+}
 
