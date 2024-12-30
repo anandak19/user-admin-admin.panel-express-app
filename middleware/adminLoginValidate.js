@@ -26,7 +26,7 @@ const adminLoginValidate = async (req, res, next) => {
   }
 };
 
-const checkIsAdmin = async (req, res) => {
+const checkIsAdmin = async (req, res, next) => {
   if (req.session.user && req.session.isAdmin) {
     return next();
   }

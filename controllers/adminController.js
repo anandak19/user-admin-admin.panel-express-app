@@ -33,7 +33,7 @@ const getAllUsers = async (req, res) => {
     }
 }
 
-
+// search 
 const searchByUsername = async (req, res) =>{
     try {
         const {username} = req.body
@@ -45,4 +45,18 @@ const searchByUsername = async (req, res) =>{
     }
 }
 
-module.exports = {validateAdmin, getAllUsers, searchByUsername}
+const deleteUser = async (req, res) => {
+    try {
+        const {username} = req.params
+        const deletedUser = await userSchema.findOneAndDelete({username})
+        if (!deletedUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.redirect('/api/admin')
+    } catch (error) {
+        console.error('Error deleting user:', error); // Log error for debugging
+        res.status(500).json({ message: 'Error deleting the user', error: error.message })
+    }
+}
+
+module.exports = {validateAdmin, getAllUsers, searchByUsername, deleteUser}
