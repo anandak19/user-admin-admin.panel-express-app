@@ -1,4 +1,5 @@
 const express = require("express");
+
 const { registerUser, loginUser } = require("../controllers/userController");
 const { signupValidations } = require("../middleware/signupValidation");
 const { loginValidate } = require("../middleware/loginValidator");
@@ -24,20 +25,34 @@ router.get("/logout", (req, res) => {
       return res.status(500).send("Failed to destroy session");
     }
     res.clearCookie("connect.sid");
-    res.redirect('/api/login')
+    res.redirect("/api/login");
   });
 });
 
 //get signup
 router.get("/signup", (req, res) => {
-  if (req.session.user) {
-    res.redirect("/"); 
+  if (req.session.user && !req.session.isAdmin) {
+    res.redirect("/");
   } else {
-    res.render("signup", { title: "Signup" });
+    const isAdmin = req.session.isAdmin;
+    res.render("signup", {
+      title: isAdmin ? "Create User" : "Signup",
+      actionUrl: isAdmin
+      ? "/api/admin/action/create"
+      : "/api/signup/submitted",
+      isAdmin: isAdmin,
+    });
   }
 });
 
 // submit signup
-router.post("/signup/submited", signupValidations, registerUser);
+router.post(
+  "/signup/submitted",
+  signupValidations,
+  registerUser,
+  (_req, res) => {
+    res.redirect("/api/login");
+  }
+);
 
 module.exports = router;

@@ -9,16 +9,32 @@ const {
 const signupValidations = async (req, res, next) => {
   try {
     const { fullname, username, email, password, confirmPassword } = req.body;
-    let alertMessage = await validateName(fullname) || await validateUsername(username) || await validateEmail(email) || await validatePassword(password, confirmPassword);
+
+    const alertMessage =
+      (await validateName(fullname)) ||
+      (await validateUsername(username)) ||
+      (await validateEmail(email)) ||
+      (await validatePassword(password, confirmPassword));
 
     if (alertMessage) {
-      res.render('signup', {title: 'Signup', alertMessage: alertMessage} )
+      const isAdmin = req.session.isAdmin;
+      res.render("signup", {
+        title: isAdmin ? "Create User" : "Signup",
+        alertMessage: alertMessage,
+        actionUrl: isAdmin
+          ? "/api/admin/action/create"
+          : "/api/signup/submitted",
+        isAdmin: isAdmin,
+        user: isAdmin ? req.session.user: null
+      });
     } else {
       next();
     }
   } catch (error) {
-    res.status(500).json({error: "Server error"})
+    console.error("Validation Error:", error.message);
+    res.status(500).json({ error: "Server error. Please try again later." });
   }
 };
 
-module.exports = {signupValidations}
+
+module.exports = { signupValidations };

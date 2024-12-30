@@ -31,6 +31,17 @@ const validateUsername = async (username) => {
   return null;
 };
 
+const validateUpdatedUsername = async(username) => {
+  if (
+    (!username && username.length < 3) ||
+    username.length > 10 ||
+    !usernameRegex.test(username)
+  ) {
+    return "Username must be between 3 and 20 characters long and contain only letters, numbers, and underscores.";
+  }
+  return null;
+};
+
 const validateEmail = async (email) => {
   if (!email || !emailRegex.test(email)) {
     return "Please enter a valid email address";
@@ -38,6 +49,12 @@ const validateEmail = async (email) => {
   const existingUser = await userSchema.findOne({ email });
   if (existingUser) {
     return "This email is already registered. Please use a different email.";
+  }
+};
+
+const validateUpdatedEmail = async (email) => {
+  if (!email || !emailRegex.test(email)) {
+    return "Please enter a valid email address";
   }
 };
 
@@ -53,6 +70,8 @@ const validatePassword = async (password, confirmPassword) => {
 module.exports = {
   validateName,
   validateUsername,
+  validateUpdatedUsername,
   validateEmail,
+  validateUpdatedEmail,
   validatePassword,
 };

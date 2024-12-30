@@ -2,11 +2,12 @@
     <div class="main-card container px-5 h-50 w-100 rounded">
         <h1 class="text-center">Admin panel</h1>
 
-        <div class="container float-right" >
-        <form action="/api/admin/action/search" method="post" class="d-flex justify-content-end align-items-center">
-            <input class="search-box" type="text" name="username" placeholder="Search User">
-            <button type="submit" class="btn btn-primary mx-2 btn-sm">Search</button>
-        </form>
+        <div class="container">
+            <form action="/api/admin/action/search" method="post" class="d-flex justify-content-end align-items-center">
+                <input class="search-box" type="text" name="username" placeholder="Search User">
+                <button type="submit" class="btn btn-primary mx-2 btn-sm">Search</button>
+                <a href="/api/signup" class="btn btn-warning mx-2 btn-sm">Add User</a>
+            </form>
         </div>
         <div class="container mt-5">
             <table class="table table-bordered table-striped text-center">
@@ -21,6 +22,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {{#if users.length}}
                     {{#each users}}
                     <tr>
                         <td>{{this.username}}</td>
@@ -29,14 +31,20 @@
                         <td>{{this.password}}</td>
                         <td>{{this.isAdmin}}</td>
                         <td>
-                            <a class="btn btn-primary" href="http://">Update</a>
+                            <a class="btn btn-primary btn-sm" href="/api/admin/updateform/{{this._id}}">Update</a>
                             <form action="/api/admin/action/delete/{{this.username}}" method="POST"
                                 onsubmit="return confirm('Are you sure you want to delete this user?');">
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-danger btn-sm mt-2">Delete</button>
                             </form>
                         </td>
                     </tr>
                     {{/each}}
+                    {{else}}
+                    <tr>
+                        <td colspan="6" class="text-center">No users found</td>
+                    </tr>
+                    {{/if}}
+
                 </tbody>
             </table>
         </div>
