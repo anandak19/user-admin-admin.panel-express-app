@@ -11,12 +11,16 @@ router.get("/login", (req, res) => {
   if (req.session.user) {
     res.redirect("/");
   } else {
-    res.render("login", { title: "Login" });
+    const message = req.flash('message')
+    const alertMessage = req.flash('alertMessage')
+    const username = req.flash('username')
+    res.render("login", { title: "Login", message, alertMessage, username });
   }
 });
 
 //submit login
-router.post("/login/submitted", loginValidate, loginUser);
+// router.post("/login", loginValidate, loginUser);
+router.post("/login", loginValidate);
 
 // logout
 router.get("/logout", (req, res) => {
@@ -41,6 +45,7 @@ router.get("/signup", (req, res) => {
       ? "/api/admin/action/create"
       : "/api/signup/submitted",
       isAdmin: isAdmin,
+      user: req.session.user
     });
   }
 });
@@ -50,7 +55,8 @@ router.post(
   "/signup/submitted",
   signupValidations,
   registerUser,
-  (_req, res) => {
+  (req, res) => {
+    req.flash('message', 'Signup Succesfull. Please login now to continue')
     res.redirect("/api/login");
   }
 );

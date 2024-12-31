@@ -59,13 +59,14 @@ const validateUpdatedEmail = async (email) => {
 };
 
 const validatePassword = async (password, confirmPassword) => {
-  if (!password && passwordRegex.test(password)) {
+  if (!password || passwordRegex.test(password)) {
     return "Password must be at least 8 characters long and include at least one letter and one number.";
   }
   if (password !== confirmPassword) {
     return "Passwords do not match. Please try again.";
   }
 };
+
 
 module.exports = {
   validateName,

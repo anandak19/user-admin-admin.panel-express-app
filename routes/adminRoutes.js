@@ -1,5 +1,4 @@
 const express = require("express");
-const methodOverride = require('method-override');
 const {
   validateAdmin,
   deleteUser,
@@ -17,7 +16,6 @@ const { registerUser } = require("../controllers/userController");
 const { updateValidator } = require("../middleware/updateValidator");
 
 const router = express.Router();
-router.use(methodOverride('_method'))
 
 
 // get admin panel

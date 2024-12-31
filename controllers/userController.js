@@ -13,18 +13,5 @@ const registerUser = async (req, res, next) => {
   }
 };
 
-const loginUser = async (req, res) => {
-  if (req.session.user) {
-    res.redirect("/");
-  } else {
-    try {
-      const { username } = req.body;
-      req.session.user = username;
-      res.redirect("/");
-    } catch (error) {
-      res.status(500).json({ error: "Error loging user" });
-    }
-  }
-};
 
-module.exports = { registerUser, loginUser };
+module.exports = { registerUser };

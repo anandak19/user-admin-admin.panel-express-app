@@ -6,6 +6,7 @@ const { engine } = require("express-handlebars");
 const { connectDB } = require("./config/db");
 const session = require("express-session");
 const nocache = require("nocache");
+const flash = require('connect-flash')
 require("dotenv").config();
 
 const userRoutes = require("./routes/userRoutes");
@@ -40,7 +41,7 @@ app.use(
     },
   })
 );
-
+app.use(flash())
 app.use(nocache());
 
 app.set("views", path.join(__dirname, "views"));

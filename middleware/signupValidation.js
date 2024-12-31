@@ -25,14 +25,15 @@ const signupValidations = async (req, res, next) => {
           ? "/api/admin/action/create"
           : "/api/signup/submitted",
         isAdmin: isAdmin,
-        user: isAdmin ? req.session.user: null
+        user: isAdmin ? req.session.user: null,
+        fullname, username, email, password, confirmPassword
       });
     } else {
       next();
     }
   } catch (error) {
     console.error("Validation Error:", error.message);
-    res.status(500).json({ error: "Server error. Please try again later." });
+    res.status(500).json({ message: "Server error. User signup failed." });
   }
 };
 

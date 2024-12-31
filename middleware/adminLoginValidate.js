@@ -22,7 +22,7 @@ const adminLoginValidate = async (req, res, next) => {
     req.session.isAdmin = user.isAdmin
     next()
   } catch (error) {
-    res.status(500).json({error: "Server error"})
+    res.status(500).json({message: "Server error. Admin validation failed"})
   }
 };
 
