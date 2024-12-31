@@ -12,8 +12,11 @@ body {
 .main-card {
   background-color: #ffffff;
   padding: 22px 38px 28px 28px;
-  margin-top: 88px;
+  margin-top: 11rem;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+.signup-card{
+  margin-top: 5rem;
 }
 
 label{
@@ -48,5 +51,28 @@ label{
 }
 .search-box:focus{
   transform: scale(1.03);
+}
+
+.score-card {
+  background-color: #6e4ea6;
+      transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.timetable-card {
+  background-color: #5f70c6;
+      transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.linkdin-card {
+  background-color: #4589d4;
+      transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.score-card:hover, 
+.timetable-card:hover, 
+.linkdin-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    opacity: 0.9;
 }
 

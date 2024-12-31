@@ -1,8 +1,8 @@
 const userSchema = require('../models/userSchema')
 
+// validating admin 
 const validateAdmin = async (req, res) => {
     try {
-      console.log(req.session.isAdmin);
       if (req.session.user) {
         return res.redirect("/api/admin"); 
       }
@@ -23,7 +23,7 @@ const validateAdmin = async (req, res) => {
     }
   };
   
-
+// get all users 
 const getAllUsers = async (req, res) => {
     try {
         const users = await userSchema.find()
@@ -44,6 +44,7 @@ const searchByUsername = async (req, res) =>{
     }
 }
 
+// delete user 
 const deleteUser = async (req, res) => {
     try {
         const {username} = req.params
@@ -58,6 +59,7 @@ const deleteUser = async (req, res) => {
     }
 }
 
+// prepare update form 
 const setUpdateForm = async(req, res) => {
   try {
     const {userId} = req.params
@@ -75,6 +77,7 @@ const setUpdateForm = async(req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message })
   }
 }
+
 //
 const updateUser = async (req, res) => {
   try {
