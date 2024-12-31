@@ -37,8 +37,11 @@ const getAllUsers = async (req, res) => {
 const searchByUsername = async (req, res) =>{
     try {
         const {username} = req.body
-        const result = await userSchema.findOne({username})
-        res.render('adminPanel', {users: [result], user: req.session.user})
+        const result = await userSchema.find({
+          username: { $regex: `^${username}`, $options: 'i' }
+      });
+      console.log(result)
+        res.render('adminPanel', {users: result, user: req.session.user})
     } catch (error) {
         res.status(500).json({message: 'Error searching user', error: error.message})
     }
