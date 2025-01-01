@@ -9,6 +9,7 @@ const updateValidator = async (req, res, next) => {
   console.log("update start");
   try {
     const { fullname, username, email, password, confirmPassword } = req.body;
+    const userData = { fullname, username, email, password };
     const alertMessage =
       (await validateName(fullname)) ||
       (await validateUpdatedUsername(username)) ||
@@ -22,6 +23,7 @@ const updateValidator = async (req, res, next) => {
         title: "Update User",
         alertMessage: alertMessage,
         isAdmin: isAdmin,
+        userData,
       });
     } else {
       next();

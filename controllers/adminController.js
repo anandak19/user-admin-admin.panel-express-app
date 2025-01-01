@@ -69,8 +69,8 @@ const setUpdateForm = async(req, res) => {
     console.log(req.params)
     const userData = await userSchema.findById(userId)
     console.log(userData)
-    if (!userData) {
-      console.log("not admin")
+    if (!userData || req.session?.isSubmitted) {
+      req.session.isSubmitted = false
       res.redirect('/api/admin')
     }else{
       console.log("admin - rendering page")
@@ -92,6 +92,7 @@ const updateUser = async (req, res) => {
       console.log("User not found");
       return res.status(404).json({ message: "User not found" });
     }
+    req.session.isSubmitted = true
     res.redirect('/api/admin')
   } catch (error) {
     console.log(error)

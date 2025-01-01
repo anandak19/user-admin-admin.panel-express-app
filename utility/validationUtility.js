@@ -3,7 +3,7 @@ const userSchema = require("../models/userSchema");
 const nameRegex = /^[a-zA-Z\s]+$/;
 const usernameRegex = /^[a-zA-Z0-9_]+$/;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/;
 
 const validateName = (fullName) => {
   if (
@@ -59,8 +59,9 @@ const validateUpdatedEmail = async (email) => {
 };
 
 const validatePassword = async (password, confirmPassword) => {
-  if (!password || passwordRegex.test(password)) {
-    return "Password must be at least 8 characters long and include at least one letter and one number.";
+  if (!password || !passwordRegex.test(password)) {
+    console.log("paswrd err")
+    return "Password must be at least 4 characters long and include at least one letter and one number.";
   }
   if (password !== confirmPassword) {
     return "Passwords do not match. Please try again.";

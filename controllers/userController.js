@@ -7,11 +7,13 @@ const registerUser = async (req, res, next) => {
     console.log(fullname);
     const newUser = new userShema({ fullname, username, email, password });
     await newUser.save();
+    req.session.isSubmitted = true
     return next()
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
+
 
 
 module.exports = { registerUser };

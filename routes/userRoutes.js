@@ -19,7 +19,6 @@ router.get("/login", (req, res) => {
 });
 
 //submit login
-// router.post("/login", loginValidate, loginUser);
 router.post("/login", loginValidate);
 
 // logout
@@ -38,15 +37,20 @@ router.get("/signup", (req, res) => {
   if (req.session.user && !req.session.isAdmin) {
     res.redirect("/");
   } else {
-    const isAdmin = req.session.isAdmin;
-    res.render("signup", {
-      title: isAdmin ? "Create User" : "Signup",
-      actionUrl: isAdmin
-      ? "/api/admin/action/create"
-      : "/api/signup/submitted",
-      isAdmin: isAdmin,
-      user: req.session.user
-    });
+    if (req.session.isSubmitted) {
+      req.session.isSubmitted = false
+      res.redirect('/api/admin')
+    }else{
+      const isAdmin = req.session.isAdmin;
+      res.render("signup", {
+        title: isAdmin ? "Create User" : "Signup",
+        actionUrl: isAdmin
+        ? "/api/admin/action/create"
+        : "/api/signup/submitted",
+        isAdmin: isAdmin,
+        user: req.session.user
+      });
+    }
   }
 });
 
